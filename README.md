@@ -67,28 +67,29 @@ In advanced stages, the focus shifts to improving query performance. Some optimi
 ## 15 Questions(Solved)
 
 ### Level-1
+
 1. Retrieve the names of all tracks that have more than 1 billion streams.**
 ```sql
 SELECT * FROM spotify
 WHERE stream > 1000000000
-
+```
 2. List all albums along with their respective artists.**
 ```sql
 SELECT DISTINCT album,artist FROM spotify
 order by 1
 SELECT DISTINCT album FROM spotify
 order by 1
-
+```
 3. Get the total number of comments for tracks where `licensed = TRUE`.**
 ```sql
 SELECT SUM(comments) as total_comments FROM spotify
 WHERE licensed= true
-
+```
 4. Find all tracks that belong to the album type `single`.**
 ```sql
 SELECT track FROM spotify
 Where album_type= 'single' 
-
+```
 5. Count the total number of tracks by each artist.**
 ```sql
 SELE
@@ -97,7 +98,7 @@ COUNT (*) as total_no_songs
 FROM spotify
 GROUP BY artist
 order by 2 
-
+```
 ### Level-2
 1. Calculate the average danceability of tracks in each album.**
 ```sql
@@ -105,14 +106,14 @@ SELECT album, avg(danceability) as avg_danceability
 FROM spotify
 GROUP BY 1
 ORDER BY 2 DESC
-
+```
 2. Find the top 5 tracks with the highest energy values.**
 ```sql
 SELECT TRACK, MAX(ENERGY) FROM SPOTIFY
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5
-
+```
 3. List all tracks along with their views and likes where `official_video = TRUE`.**
 ```sql
 SELECT track, 
