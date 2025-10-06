@@ -76,9 +76,9 @@ WHERE stream > 1000000000
 2. List all albums along with their respective artists.
 ```sql
 SELECT DISTINCT album,artist FROM spotify
-order by 1
+ORDER BY 1
 SELECT DISTINCT album FROM spotify
-order by 1
+ORDER BY 1
 ```
 3. Get the total number of comments for tracks where `licensed = TRUE`.
 ```sql
@@ -88,7 +88,7 @@ WHERE licensed= true
 4. Find all tracks that belong to the album type `single`.
 ```sql
 SELECT track FROM spotify
-Where album_type= 'single' 
+WHERE album_type= 'single' 
 ```
 5. Count the total number of tracks by each artist.
 ```sql
@@ -102,7 +102,7 @@ order by 2
 ### Level-2
 1. Calculate the average danceability of tracks in each album.
 ```sql
-SELECT album, avg(danceability) as avg_danceability
+SELECT album, avg(danceability) AS avg_danceability
 FROM spotify
 GROUP BY 1
 ORDER BY 2 DESC
@@ -117,17 +117,17 @@ LIMIT 5
 3. List all tracks along with their views and likes where `official_video = TRUE`.
 ```sql
 SELECT track, 
-sum(views) as total_views,
-sum(likes) as total_likes
-from spotify
-where official_video='true'
-group by 1
-order by 2 desc
+sum(views) AS total_views,
+sum(likes) AS total_likes
+FROM spotify
+WHERE official_video='true'
+GROUP BY 1
+ORDER BY 2 DESC
 ```
 4. For each album, calculate the total views of all associated tracks.
 ```sql
-SELECT ALBUM, TRACK,
-SUM(VIEWS) AS TOTATL_VIEWS
+SELECT album, track,
+sum(views) AS total_views
 FROM SPOTIFY
 GROUP BY 1,2
 ORDER BY 3 DESC
@@ -139,10 +139,10 @@ SELECT * FROM
 track,
 COALESCE(SUM(CASE WHEN most_played_on = 'Youtube'then stream end),0) as streamed_on_youtube,
 COALESCE(SUM(CASE WHEN most_played_on = 'Spotify'then stream end),0) as streamed_on_spotify
-from spotify
-group by 1
-) as t1
-where
+FROM spotify
+GROUP BY 1
+) AS t1
+WHERE
 streamed_on_spotify > streamed_on_youtube
 AND
 streamed_on_youtube <> 0
@@ -153,11 +153,11 @@ streamed_on_youtube <> 0
 ```sql
 WITH ranking_artist
 AS
-(SELECT artist,track,SUM(VIEWS) as total_views,
+(SELECT artist,track,SUM(VIEWS) AS total_views,
 DENSE_RANK() OVER(PARTITION BY ARTIST ORDER BY SUM(VIEWS) DESC) AS RANK
 FROM spotify
-group by 1,2
-order by 1,3 desc)
+GROUP BY 1,2
+ORDER BY 1,3 DESC)
 SELECT * FROM ranking_artist
 WHERE rank<= 3
 ```
@@ -173,8 +173,8 @@ WITH cte
 AS
 (SELECT 
 	album,
-	MAX(energy) as highest_energy,
-	MIN(energy) as lowest_energery
+	MAX(energy) AS highest_energy,
+	MIN(energy) AS lowest_energery
 FROM spotify
 GROUP BY 1
 )
