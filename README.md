@@ -188,10 +188,10 @@ ORDER BY 2 DESC
 4. Find tracks where the energy-to-liveness ratio is greater than 1.2.
 ```sql
 SELECT
-    TRACK,
-	ENERGY/LIVENESS AS  energy_to_liveness_ratio
+    track,
+	energy/liveness AS  energy_to_liveness_ratio
 FROM spotify
-WHERE ENERGY/LIVENESS> 1.2
+WHERE energy/liveness> 1.2
 ```
 5. Calculate the cumulative sum of likes for tracks ordered by the number of views, using window functions.
 ```sql
