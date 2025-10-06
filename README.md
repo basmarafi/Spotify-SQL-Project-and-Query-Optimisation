@@ -124,7 +124,7 @@ where official_video='true'
 group by 1
 order by 2 desc
 ```
-4. For each album, calculate the total views of all associated tracks.**
+4. For each album, calculate the total views of all associated tracks.
 ```sql
 SELECT ALBUM, TRACK,
 SUM(VIEWS) AS TOTATL_VIEWS
@@ -132,7 +132,7 @@ FROM SPOTIFY
 GROUP BY 1,2
 ORDER BY 3 DESC
 ```
-5. Retrieve the track names that have been streamed on Spotify more than YouTube.**
+5. Retrieve the track names that have been streamed on Spotify more than YouTube.
 ```sql
 SELECT * FROM 
 (SELECT
@@ -149,7 +149,7 @@ streamed_on_youtube <> 0
 
 ```
 ### Level-3
-1. Find the top 3 most-viewed tracks for each artist using window functions.**
+1. Find the top 3 most-viewed tracks for each artist using window functions.
 ```sql
 WITH ranking_artist
 AS
@@ -161,13 +161,13 @@ order by 1,3 desc)
 SELECT * FROM ranking_artist
 WHERE rank<= 3
 ```
-2. Write a query to find tracks where the liveness score is above the average.**
+2. Write a query to find tracks where the liveness score is above the average.
 ```sql
 SELECT track,liveness
 FROM spotify
 WHERE liveness > (SELECT AVG(liveness) FROM spotify)
 ```
-3. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.**
+3. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.
 ```sql
 WITH cte
 AS
@@ -185,7 +185,7 @@ FROM cte
 ORDER BY 2 DESC
 ```
    
-4. Find tracks where the energy-to-liveness ratio is greater than 1.2.**
+4. Find tracks where the energy-to-liveness ratio is greater than 1.2.
 ```sql
 SELECT
     TRACK,
@@ -193,9 +193,12 @@ SELECT
 FROM spotify
 WHERE ENERGY/LIVENESS> 1.2
 ```
-5. Calculate the cumulative sum of likes for tracks ordered by the number of views, using window functions.**
+5. Calculate the cumulative sum of likes for tracks ordered by the number of views, using window functions.
 ```sql
-
+SELECT
+    track,views,likes,
+    SUM(likes) OVER (ORDER BY views) AS cumulative_likes
+FROM spotify;
 ```
 ---
 
