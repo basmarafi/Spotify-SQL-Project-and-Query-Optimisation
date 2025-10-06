@@ -167,7 +167,7 @@ SELECT track,liveness
 FROM spotify
 WHERE liveness > (SELECT AVG(liveness) FROM spotify)
 ```
-3. **Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.
+3. Use a `WITH` clause to calculate the difference between the highest and lowest energy values for tracks in each album.
 ```sql
 WITH cte
 AS
@@ -234,9 +234,9 @@ To improve query performance, we carried out the following optimization process:
       ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%203.png)
       ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%202.png)
       ![Performance Graph](https://github.com/najirh/najirh-Spotify-Data-Analysis-using-SQL/blob/main/spotify_graphical%20view%201.png)
-
 This optimization shows how indexing can drastically reduce query time, improving the overall performance of our database operations in the Spotify project.
 ---
+
 
 ## Technology Stack
 - **Database**: PostgreSQL
